@@ -1,0 +1,6 @@
+# Project exclude paths
+/template-admin/target/
+/template-api/target/
+/template-common/target/
+/template-service/target/
+/template-web/target/
