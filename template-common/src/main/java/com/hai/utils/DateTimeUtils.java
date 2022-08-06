@@ -64,16 +64,4 @@ public class DateTimeUtils {
         return Integer.parseInt(System.currentTimeMillis() / 1000 + "");
     }
 
-    public static void main(String[] args) {
-        Long timestamp = System.currentTimeMillis();
-        String pattern = "yyyy年MM月dd日HH时mm分";
-        System.out.println(convertTimestamp2Date(timestamp, pattern));
-
-        System.out.printf( Base64.getEncoder().encodeToString("gd_yz:gd_yz".getBytes(StandardCharsets.UTF_8)));
-    }
-
-
-
-
-
 }

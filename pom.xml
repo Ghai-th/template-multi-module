@@ -77,12 +77,6 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
-<!--        swagger新ui-->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
-        </dependency>
 
 
         <!-- fastjson json-->

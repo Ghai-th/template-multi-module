@@ -11,12 +11,6 @@ import java.util.Date;
  * @Author: xiang
  * @Date: 2021/5/11 21:11
  * <p>
- * JwtToken生成的工具类
- * JWT token的格式：header.payload.signature
- * header的格式（算法、token的类型）,默认：{"alg": "HS512","typ": "JWT"}
- * payload的格式 设置：（用户信息、创建时间、生成时间）
- * signature的生成算法：
- * HMACSHA512(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
  */
 
 @Component
