@@ -39,3 +39,5 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sxbdjw.bdjwkingbaseapi.model
+jwt:
+  exclude: LoginController
