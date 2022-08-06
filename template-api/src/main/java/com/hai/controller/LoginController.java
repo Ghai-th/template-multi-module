@@ -76,8 +76,4 @@ public class LoginController {
             put("code",userBase.getCode());
         }}.toJSONString());
     }
-
-
-
-
 }
