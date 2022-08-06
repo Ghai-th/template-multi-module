@@ -33,15 +33,16 @@ public class LoginController {
     @ApiOperation("登录")
     @PostMapping("/login")
     public AjaxResponse login(String code,String password){
+        if(code == null || password == null){
+            return AjaxResponse.failed("参数不完整");
+        }
         UserBase userBase = userBaseService.selectByCode(code);
-
+        if (userBase == null){
+            return AjaxResponse.failed("未注册的用户");
+        }
         String md5Code = DigestUtil.md5Hex(password + userBase.getSalt());
         if (md5Code.equals(userBase.getPassword())){
-            return AjaxResponse.success("登录成功").add(JWTUtils.USER_TOKEN,JWTUtils.createToken(new JSONObject(){{
-                put("uid",userBase.getId());
-                put("userName",userBase.getUserName());
-                put("code",userBase.getCode());
-            }}.toJSONString()));
+            return AjaxResponse.success("登录成功").add(JWTUtils.USER_TOKEN,getUserToken(userBase));
         }
         return AjaxResponse.failed("账号或密码错误");
     }
@@ -66,13 +67,16 @@ public class LoginController {
             setUpdateTime(time);
         }};
         userBaseService.insert(registerUser);
+        return AjaxResponse.success().add(JWTUtils.USER_TOKEN,getUserToken(registerUser));
+    }
 
 
-        return AjaxResponse.success().add(JWTUtils.USER_TOKEN,JWTUtils.createToken(new JSONObject(){{
-            put("uid",registerUser.getId());
-            put("userName",registerUser.getUserName());
-            put("code",registerUser.getCode());
-        }}.toJSONString()));
+    private String getUserToken(UserBase userBase){
+        return JWTUtils.createToken(new JSONObject(){{
+            put("uid",userBase.getId());
+            put("userName",userBase.getUserName());
+            put("code",userBase.getCode());
+        }}.toJSONString());
     }
 
 
