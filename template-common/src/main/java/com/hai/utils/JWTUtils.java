@@ -1,5 +1,6 @@
 package com.hai.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
@@ -86,7 +87,18 @@ public class JWTUtils {
         return (expiresAt.getTime()-System.currentTimeMillis()) < (expireTime>>1);
     }
 
+    public static void main(String[] args) {
 
+        System.out.println(JWT.create()
+                .withSubject(new JSONObject() {{
+                    put("uid", 1123456L);
+                    put("userName", "admin");
+                    put("code", "admin");
+                }}.toJSONString())
+                .withIssuedAt(new Date(System.currentTimeMillis()))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expireTime * 30L * 24 * 60 * 1000L))
+                .sign(Algorithm.HMAC512(secret)));
+    }
 
 }
 
